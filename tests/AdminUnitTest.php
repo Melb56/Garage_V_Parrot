@@ -2,12 +2,16 @@
 
 namespace App\Tests;
 
+use App\Entity\Admin;
 use PHPUnit\Framework\TestCase;
 
 class AdminUnitTest extends TestCase
 {
-    public function testSomething(): void
+    public function testIsTrue(): void
     {
-        $this->assertTrue(true);
+        $admin = new Admin();
+
+        $admin->setEmail('admin@test.com');
+
     }
 }

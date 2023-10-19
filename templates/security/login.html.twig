@@ -1,30 +1,46 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+ {% extends 'base.html.twig' %}
 
-    <title>Connexion</title>
+{% block body %}
+<section class="container">
+  <div class="row"> 
+  <form  method="post">
+   
+  	 {% if error %}
+      <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security')}}</div>
+    {% endif %} 
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <link href="assets\css\signin.css" rel="stylesheet">
+    {% if app.user %}
+		  <div class="mb-3"> Vous êtes connecté(e) comme {{app.user.email}}, 
+        <a href="{{ path('app_logout')}}">Me déconnecter</a>
+      </div>
+    {% endif %}  
 
-  </head>
+ <!-- <img class="mb-4" <img src="img\Logo_transparent.png" width="300" height="auto" alt=""> -->
+      <h1 class="h3 mb-3 font-weight-normal text-center">Connexion</h1>
+        <label class="sr-only" for="inputEmail" >Adresse email</label>
+          <input class="form-control" type="email" value="{{ last_username }}" id="inputEmail"  placeholder="" required autofocus>
 
-  <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" <img src="img\Logo_transparent.png" width="300" height="auto" alt="">
-      <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-      <label for="inputEmail" class="sr-only">Adresse email</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Mot de passe</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">se connecter</button>
+        <label class="sr-only" for="inputPassword" >Mot de passe</label>
+          <input class="form-control" type="password" id="inputPassword"  placeholder="" required>
+
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Me connecter</button>
+
       <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
     </form>
-  </body>
-</html>
+
+
+  </div>
+
+</section>
+   
+
+
+	
+ 
+ 
+ 
+ 
+     
+{% endblock %}
