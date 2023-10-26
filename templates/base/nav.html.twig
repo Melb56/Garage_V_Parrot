@@ -24,6 +24,12 @@
           </div>
         </div>
     </div> 
-
+{% if app.user %}
+			Bienvenue
+				{{ app.user.prenom}}
+		<a href="/logout">Se déconnecter</a>
+						{% else %}
+		<a href="/login">Se connecter</a>
+{% endif %}
   </div>
 </nav>

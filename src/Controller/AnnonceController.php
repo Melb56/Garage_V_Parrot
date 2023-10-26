@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
-use App\Form\AjoutAnnonceType;
 use App\Repository\AnnonceRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;

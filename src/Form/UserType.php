@@ -6,6 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,54 +24,80 @@ class UserType extends AbstractType
             ->add("email", EmailType::class, [
                 "label" => "L'email",
                 "required" => true,
-                //contraintes de validations
                 "constraints" => [
-                    new Length(["min" => 2, "max" => 180, "minMessage" => "L'email ne doit pas faire moins de 2 caractères", "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
-                    new NotBlank(["message" => "L'email ne doit pas être vide !"])
+                    new Length([
+                        "min" => 2, 
+                        "max" => 180, 
+                        "minMessage" => "L'email ne doit pas faire moins de 2 caractères", 
+                        "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
+                    new NotBlank([
+                        "message" => "L'email ne doit pas être vide !"])
                 ]
             ])
           
             ->add("nom", TextType::class, [
                 "label" => "Le nom de famille",
                 "required" => true,
-                //contraintes de validations
                 "constraints" => [
-                    new Length(["min" => 2, "max" => 180, "minMessage" => "Le nom ne doit pas faire moins de 2 caractères", "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
-                    new NotBlank(["message" => "Le nom ne doit pas être vide !"])
+                    new Length([
+                        "min" => 2, 
+                        "max" => 180, 
+                        "minMessage" => "Le nom ne doit pas faire moins de 2 caractères", 
+                        "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
+                    new NotBlank([
+                        "message" => "Le nom ne doit pas être vide !"])
                 ]
             ])
 
             ->add("prenom", TextType::class, [
                 "label" => "Le prénom",
                 "required" => true,
-                //contraintes de validations
                 "constraints" => [
-                    new Length(["min" => 2, "max" => 180, "minMessage" => "Le prénom ne doit pas faire moins de 2 caractères", "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
-                    new NotBlank(["message" => "Le prénom ne doit pas être vide !"])
+                    new Length([
+                        "min" => 2, 
+                        "max" => 180, 
+                        "minMessage" => "Le prénom ne doit pas faire moins de 2 caractères", 
+                        "maxMessage" => "L'email ne doit pas faire plus de 180 caractères"]),
+                    new NotBlank([
+                        "message" => "Le prénom ne doit pas être vide !"])
                 ]
             ])
 
-            ->add("password", PasswordType::class, [
-                "label" => "Mot de passe",
-                "required" => true,
-                //contraintes de validations
+            ->add("plainPassword", RepeatedType::class, [
+                "type" => PasswordType::class,
+                "first_options" => [
+                    "attr" => [
+                        "class" => "form-control"
+                    ],
+                    "label" => "Mot de passe",
+                    "label_attr" => [
+                        "class" => "form-label  mt-4"
+                    ]
+                ],
+                "second_options" => [
+                    "attr" => [
+                        "class" => "form-control"
+                    ],
+                    "label" => "Confirmation du mot de passe",
+                    "label_attr" => [
+                        "class" => "form-label  mt-4"
+                    ]
+                ],
+                "invalid_message" => "Les mots de passe ne correspondent pas.",
                 "constraints" => [
-                    new NotBlank(["message" => "Le mot de passe ne peut pas être vide !"])
-                ]
+                    new NotBlank([
+                        "message" => "Le mot de passe ne peut pas être vide !"])
+                    ]
             ])
+
+            ->add("submit", SubmitType::class, [
+                "attr" => [
+                    "class" => "btn btn-primary mt-4"
+                ],
+                "label" => "Modifier mes informations",
+    
+            ]);  
             
-            ->add("confirm", PasswordType::class, [
-                "label" => "Confirmer le mot de passe",
-                "required" => true,
-                "constraints" => [//contraintes de validations
-                    new NotBlank(["message" => "Le mot de passe ne peut pas être vide !"]),
-                    new Callback(['callback' => function ($value, ExecutionContext $ec) {
-                        if ($ec->getRoot()['password']->getViewData() !== $value) {
-                            $ec->addViolation("Les mots de passe doivent être identique !");
-                        }
-                    }])
-                ]
-            ]);
     }
 
 
@@ -77,9 +105,9 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             "data_class" => User::class,
-            'csrf_protection' => true,
+            /*'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'post_item',
+            'csrf_token_id'   => 'post_item', */
         ]);
     }
 }

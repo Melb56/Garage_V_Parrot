@@ -4,15 +4,26 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Test\FormBuilderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+
+    public function __construct(public UserPasswordHasherInterface $userPasswordHasher) 
+    {
+    }
 
     public static function getEntityFqcn(): string
     {
@@ -21,7 +32,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        //$this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $crud
             ->setEntityLabelInSingular('Employé')
             ->setEntityLabelInPlural('Employés')
@@ -37,15 +48,17 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             EmailField::new('email'),
-            TextField::new('Password')
-                ->hideOnIndex(),
+            /*TextField::new('Password')
+                ->hideOnIndex()
+                ->setFormType(RepeatedType::class)
+                ->setFormTypeOptions([
+                    'type' => PasswordType::class,
+                    'first_options' => ['label' => 'Mot de passe'],
+                    'second_options' => ['label' => 'Confirmation du mot de passe'], ]), */
             TextField::new('Prenom'),
             TextField::new('Nom'),
             ArrayField::new('roles')
                 ->hideOnIndex(),
-                
-
-        ];
-    }
-    
+        ]; 
+    } 
 }

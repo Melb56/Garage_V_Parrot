@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Annonce;
+use App\Entity\Contact;
+use App\Entity\Home;
+
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -17,6 +20,7 @@ class DashboardController extends AbstractDashboardController
 {
 
     #[Route('/admin', name: 'admin')]
+    //#[IsGranted('ROLE_USER')]
     //#[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
@@ -32,11 +36,11 @@ class DashboardController extends AbstractDashboardController
      public function configureMenuItems(): iterable
     {   
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');   
-        yield MenuItem::linkToCrud('Employé', 'fas fa-user', User::class);/*->setSubItems([
-            MenuItem::linkToCrud('Ajouter un compte employé', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Supprimer un compte employé', 'fas fa-minus', User::class),
-            MenuItem::linkToCrud('Modifier un compte employé', 'fas fa-pen', User::class)->setAction(Crud::PAGE_EDIT)
-        ]);*/
+        yield MenuItem::linkToCrud('Employé', 'fas fa-user', User::class)
+                ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Annonce', 'fas fa-edit', Annonce::class); 
+        yield MenuItem::linkToCrud('Information', 'fas fa-edit', Home::class)
+               ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Demandes de contact', 'fas fa-envelope', Contact::class); 
     } 
 }

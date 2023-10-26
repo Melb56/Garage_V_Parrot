@@ -28,6 +28,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "L'adresse email ne doit pas faire moins de 2 caractères",
         maxMessage: "L'adresse email ne doit pas faire plus de 180 caractères", )]      
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email()]
+    #[Assert\Length(min: 2, max: 180)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -36,21 +38,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
+    #[Assert\NotNull()]
     private array $roles = [];
 
     private ?string $plainPassword = null;
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     #[Assert\NotBlank(
         message: "Le mot de passe ne peut pas être vide !",
     )]
-    private ?string $password = null;
-
-    private ?string $confirm = null;
+    private ?string $password = 'password';
+    
+    #[ORM\OneToMany(targetEntity: "App\Entity\Annonce", mappedBy: "user")]
+    private $annonce;
 
 
     public function getId(): ?int
@@ -63,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -75,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             return $this->prenom;
         }
 
-        public function setPrenom(string $prenom): static
+        public function setPrenom(string $prenom): self
         {
             $this->prenom = $prenom;
 
@@ -87,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             return $this->nom;
         }
 
-        public function setNom(string $nom): static
+        public function setNom(string $nom): self
         {
             $this->nom = $nom;
 
@@ -116,7 +117,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -127,7 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Get the value of plainPassword
      */
-    public function getPlainPassword(): ?string
+    public function getPlainPassword()
     {
         return $this->plainPassword;
     }
@@ -154,31 +155,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->password = $password;
         return $this;
-        /*$this->password = $this->passwordHasher->hashPassword($this, $password);
-        return $this;*/
+       
+    }
+    
+    public function getAnnonce()
+    {
+        return $this->annonce;
     }
 
-/**
-     * Get the value of confirm
-     */
-    public function getConfirm()
+    public function setAnnonce($annonce): self
     {
-        return $this->confirm;
-    }
-
-    /**
-     * Set the value of confirm
-     *
-     * @return  self
-     */
-    public function setConfirm($confirm)
-    {
-        $this->confirm = $confirm;
+        $this->annonce = $annonce;
 
         return $this;
     }
-
-    
 
     /**
      * @see UserInterface
@@ -189,7 +179,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+}
     
 
     
-}
+
+   

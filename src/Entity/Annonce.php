@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\AnnonceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
+#[Vich\Uploadable]
 class Annonce
 {
 
@@ -18,6 +21,15 @@ class Annonce
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Vich\UploadableField(mapping: 'annonce_image', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?float $price = null;
 
@@ -26,9 +38,6 @@ class Annonce
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?float $km = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $image = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $carburant = null;
@@ -41,12 +50,20 @@ class Annonce
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $equipement= null;
-
-    #[ORM\ManyToOne(inversedBy: 'annonce')]
-    private ?User $utilisateur = null;
+    
+    #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: 'annonce')]
+    private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $slug = null;
+
+
+
+    public function __construct()
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
 
     public function getId(): ?int
     {
@@ -61,6 +78,53 @@ class Annonce
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+     /**
+     * Get the value of updatedAt
+     */
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt
+     */
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -163,30 +227,25 @@ class Annonce
 
         return $this;
     }
-    public function getImage()
+
+      /**
+     * Get the value of user
+     */
+    public function getUser()
     {
-        return $this->image;
+        return $this->user;
     }
 
-    public function setImage($image)
+    /**
+     * Set the value of user
+     */
+    public function setUser($user): self
     {
-        $this->image = $image;
+        $this->user = $user;
 
         return $this;
     }
-
-    public function getUtilisateur(): ?User
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?User $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }  
-
+    
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -198,9 +257,5 @@ class Annonce
 
         return $this;
     }
-
-    /**
-     * Get the value of carburant
-     */
-    
+     
 }

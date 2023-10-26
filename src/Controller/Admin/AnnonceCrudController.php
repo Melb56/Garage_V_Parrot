@@ -3,21 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Annonce;
-use App\Entity\Product;
-use App\Form\AjoutAnnonceType;
-use Doctrine\Persistence\ManagerRegistry;
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AnnonceCrudController extends AbstractCrudController
 {
@@ -28,12 +24,14 @@ class AnnonceCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        //$this->denyAccessUnlessGranted('ROLE_USER');
+        
         return $crud
             ->setEntityLabelInSingular('Annonce')
             ->setEntityLabelInPlural('Annonces')
+
             ->setPageTitle('index', "Administration des voitures d'occasions")
-            ->setDateFormat('...')      
+
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
         ;
     }
 
@@ -47,10 +45,17 @@ class AnnonceCrudController extends AbstractCrudController
             TextField::new('dateTime'),
             NumberField::new('km'),
             TextField::new('carburant'),
-            TextField::new('description'),
-            TextField::new('option'),
-            TextField::new('equipement'),
-            TextField::new('slug')
+            TextareaField::new('description')
+                ->setFormType(CKEditorType::class),
+            TextareaField::new('option')
+                ->setFormType(CKEditorType::class),
+            TextareaField::new('equipement')
+                ->setFormType(CKEditorType::class),
+            ImageField::new('imageName')
+                ->setBasePath(VichImageType::class)
+                ->setUploadDir('public/annonceImages'),
+            SlugField::new('slug')
+                ->setTargetFieldName('title'),
         ];
     } 
     
