@@ -36,8 +36,11 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Employé')
             ->setEntityLabelInPlural('Employés')
-            ->setPageTitle("index", "Administration des employés");
+            ->setPageTitle("index", "Administration des employés")
            //->setDateFormat('...')      
+
+           //->addFormTheme('form.html.twig')
+           //->overrideTemplate('crud/field/id', 'template/user/form.html.twig')
         ;
     }
 
@@ -59,6 +62,6 @@ class UserCrudController extends AbstractCrudController
             TextField::new('Nom'),
             ArrayField::new('roles')
                 ->hideOnIndex(),
-        ]; 
+        ];
     } 
 }

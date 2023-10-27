@@ -14,11 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
-    public function index(
-        Request $request,
-        EntityManagerInterface $manager,
-        MailService $mailService
-        ): Response
+    public function index(Request $request, EntityManagerInterface $em, MailService $mailService): Response
     {
 
         $contact = new Contact();
@@ -29,8 +25,8 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
 
-            $manager->persist($contact);
-            $manager->flush();
+            $em->persist($contact);
+            $em->flush();
 
         //Email
         $mailService->sendEmail(

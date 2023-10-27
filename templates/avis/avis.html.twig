@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Témoignages{% endblock %}
+
+{% block body %}
+
+
+{{ form_start(avis) }}  
+                 <div class="form-group">
+                    {{ form_label(avis.fullName) }} 
+                    <div  placeholder=""> {{ form_widget(avis.fullName) }}  </div>     
+                </div>
+                <div class="form-group">
+                    {{ form_label(avis.email) }} 
+                    <div type="email"id="form-email" placeholder=""> {{ form_widget(avis.email) }} </div>     
+                </div>
+                <div class="form-group">
+                     {{ form_label(avis.subject) }}
+                    <div type="text" id="form-subject">{{ form_widget(avis.subject) }} </div>
+                </div>
+                <div class="form-group">
+                     {{ form_label(avis.message) }} 
+                     <div id="form-message" placeholder="Message" >{{ form_widget(avis.message) }} </div>
+                    <p>Vos informations sont utilisées uniquement pour répondre à votre demande. Plus d’informations sur le traitement des données, rendez-vous sur notre page politique de confidentialité.</p>      
+                </div>    
+
+            <div type="submit" >{{ form_end(avis) }}</div>
+
+{% endblock %}

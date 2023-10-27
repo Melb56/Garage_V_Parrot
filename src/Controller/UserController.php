@@ -19,6 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
 
+    /*
     // #[IsGranted('ROLE_ADMIN')]
     // #[Security("is_granted('ROLE_ADMIN')")]
     #[Route('/compte/nouveau', name: 'user_new')]
@@ -44,9 +45,10 @@ class UserController extends AbstractController
             return $this->redirectToRoute("login");
         }
         return $this->render('user/form.html.twig', [
-            "form" => $form->createView(),  
+            "new" => $form->createView(),  
         ]);
     }
+    */
 
     //#[Security("is_granted('ROLE_USER')")]
     #[Route('/compte/modifier/{id}', name: 'user.edit')]
@@ -127,7 +129,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/edit_password.html.twig', [
-            'form' => $form->createView()
+            'pw' => $form->createView()
         ]);
     }
 

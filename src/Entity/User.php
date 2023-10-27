@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column]
     #[Assert\NotNull()]
     private array $roles = [];
 
@@ -49,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         message: "Le mot de passe ne peut pas être vide !",
     )]
     private ?string $password = 'password';
+    
     
     #[ORM\OneToMany(targetEntity: "App\Entity\Annonce", mappedBy: "user")]
     private $annonce;
