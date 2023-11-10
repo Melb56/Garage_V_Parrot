@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Annonce;
+use App\Entity\Commentaire;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -32,14 +33,14 @@ class AppFixtures extends Fixture
            $user = [];
 
             //Creation de l'admin  
-            /*$admin = new User();
+            $admin = new User();
             $admin->setEmail('admin@test.com')
                 ->setPrenom('Vincent')
                 ->setNom('Parrot')
                 ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
                 ->setPlainPassword('password');
             $user[] = $admin;
-            $manager->persist($admin);*/
+            $manager->persist($admin);
 
 
             //Creation de l'employé
@@ -76,6 +77,24 @@ class AppFixtures extends Fixture
         } 
    
         
+        // Creation de commentaires
+        
+          /*  for ($i = 0; $i < mt_rand(0, 15); $i++) {
+                $comment = new Commentaire();
+                $comment->setFullName($this->faker->fullname)
+                        ->setMessage($this->faker->realText)
+                        ->setIsApproved(!(mt_rand(0, 3) === 0))
+                        ->setCreatedAt(new \DateTimeImmutable());
+                        
+
+                $manager->persist($comment);
+                
+            }*/
+        
+
+
+
+
 
         $manager->flush();
 

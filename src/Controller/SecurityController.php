@@ -12,8 +12,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    //#[IsGranted('ROLE_USER')]
     #[Route(path: '/connexion', name: 'login')]
-   // [IsGranted('ROLE_USER')]
     public function login(AuthenticationUtils $authenticationUtils) : Response
     {
         

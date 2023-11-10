@@ -19,7 +19,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
 
-    /*
+    
     // #[IsGranted('ROLE_ADMIN')]
     // #[Security("is_granted('ROLE_ADMIN')")]
     #[Route('/compte/nouveau', name: 'user_new')]
@@ -48,9 +48,9 @@ class UserController extends AbstractController
             "new" => $form->createView(),  
         ]);
     }
-    */
+    
 
-    //#[Security("is_granted('ROLE_USER')")]
+    #[Security("is_granted('ROLE_USER')")]
     #[Route('/compte/modifier/{id}', name: 'user.edit')]
     public function edit(Request $request, User $user, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response {
 
@@ -92,7 +92,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    //#[Security("is_granted('ROLE_USER')")]
+    #[Security("is_granted('ROLE_USER')")]
     #[Route('/compte/edition-mot-de-passe/{id}', 'user.edit.password')]
     public function editPassword(User $user, Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response 
     {

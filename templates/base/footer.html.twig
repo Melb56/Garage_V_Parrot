@@ -1,19 +1,21 @@
-<footer class="row py-5 my-5 border-top ">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-4 text-center"> <img src="/img/clock-fill.svg"></img><br>  
-                     Lundi-Vendredi : 8h45-12h/14h-16h<br>Samedi : 8h45-12h<br>Dimanche : fermé
-                   
-                </div>  
-                <div class="col-4 text-center">    
-                    <img width="24" height="24" href="#" src="/img/facebook.png"></img>
-                    <img width="24" height="24" href="#" src="/img/instagram.png"></img>
-                </div>
+<div class="container">
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-4 text-center"> <img width="30" height="30" src="img/horloge.svg"></img><br>
+        Lundi-Vendredi : 8h45-12h/14h-16h<br>Samedi : 8h45-12h<br>Dimanche : fermé
+    </div>
 
-        <div class=" row text-center">
-            <p >&copy; 2023 Garage V. Parrot<br> 
-              <a style="text-decoration:none" href="{{ path('mentions_legales')}}"> Mentions légales - Politique de confidentialité</a></p>
-        </div>
-         
-    </footer>
+    <div class="col-md-4 d-flex align-items-center justify-content-center text-center mb-md-0 me-md-auto link-dark">
+        <p >&copy; 2023 Garage V. Parrot<br>
+            <a style="text-decoration:none" href="{{ path('mentions_legales')}}"> Mentions légales - Politique de confidentialité</a>
+        </p>
+
+    </div>
+
    
+
+    <ul class=" col-md-4 justify-content-end text-center">
+        <img width="24" height="24" href="#" src="/img/facebook.png"></img>
+        <img width="24" height="24" href="#" src="/img/instagram.png"></img>
+    </ul>
+</footer>
+</div>

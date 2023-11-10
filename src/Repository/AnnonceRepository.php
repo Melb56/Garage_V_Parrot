@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Annonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+
+
 
 /**
  * @extends ServiceEntityRepository<Annonce>
@@ -16,48 +20,77 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AnnonceRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, 
+                                PaginatorInterface $paginatorInterface)
     {
         parent::__construct($registry, Annonce::class);
+        //$this->paginatorInterface = $paginatorInterface;
+       
+
     }
 
- 
-
-    /*public function add(Annonce $entity, bool $flush = false): void
+    /* Récupère les annonces en lien avec une recherche
+    * @param SearchData $searchData
+    * @return PaginatorInterface
+    */
+    public function findBySearch(SearchData $searchData): array
     {
-        $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        $query = $this
+            ->createQueryBuilder('p');
+        
+        if (!empty($searchData->q)){
+            $query = $query
+                ->andWhere('p.title LIKE :q')
+                ->setParameter('q', "%{$searchData->q}%");
+                
         }
-    }
 
-    public function remove(Annonce $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        if (!empty($searchData->min)){
+            $query = $query
+                ->andWhere('p.price >= :min')
+                ->setParameter('min', $searchData->min);
+                
         }
-    }
 
-  
-    public function paginationQuery()
-    {
-       return $this->createQueryBuilder('p')
-            ->orderBy('p.id', 'ASC')
-            //->setMaxResults(10)
-            ->getQuery()       
-        ;
-    }
+        if (!empty($searchData->min)){
+            $query = $query
+                ->andWhere('p.price <= :max')
+                ->setParameter('max', $searchData->max);
+                
+        }
 
-//    public function findOneBySomeField($value): ?Annonce
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }*/
+        if (!empty($searchData->kmMin)){
+            $query = $query
+                ->andWhere('p.km >= :kmMin')
+                ->setParameter('kmMin', $searchData->kmMin);
+                
+        }
+
+        if (!empty($searchData->kmMax)){
+            $query = $query
+                ->andWhere('p.km <= :kmMax')
+                ->setParameter('kmMax', $searchData->kmMax);
+                
+        } 
+
+            if (!empty($searchData->dateTimeMin)){
+                $query = $query
+                    ->andWhere('p.dateTime >= :dateTimeMin')
+                    ->setParameter('dateTimeMin', $searchData->dateTimeMin);
+                
+        }
+
+           if (!empty($searchData->dateTimeMax)){
+            $query = $query
+                ->andWhere('p.dateTime <= :dateTimeMax')
+                ->setParameter('dateTimeMax', $searchData->dateTimeMax);
+                
+        }
+        
+        return $query->getQuery()->getResult();
+
+                
+    
+    }
 }
+   

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\UserPasswordType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
@@ -51,17 +52,16 @@ class UserCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             EmailField::new('email'),
-            /*TextField::new('Password')
-                ->hideOnIndex()
-                ->setFormType(RepeatedType::class)
-                ->setFormTypeOptions([
-                    'type' => PasswordType::class,
-                    'first_options' => ['label' => 'Mot de passe'],
-                    'second_options' => ['label' => 'Confirmation du mot de passe'], ]), */
             TextField::new('Prenom'),
             TextField::new('Nom'),
+            TextField::new('plainPassword', 'mot de passe')
+                ->setFormType(PasswordType::class)
+                ->setRequired($pageName === Crud::PAGE_NEW)
+                ->onlyOnForms(),
             ArrayField::new('roles')
                 ->hideOnIndex(),
         ];
     } 
+
+
 }

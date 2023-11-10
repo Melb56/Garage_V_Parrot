@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+    {{ form_row(form.q) }}
+
+    <h4> Prix </h4>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.min) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.max) }}
+        </div>
+    </div>
+    <div id="slider"> </div>
+
+    <h4> Kilométrage </h4>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.kmMin) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.kmMax) }}
+        </div>
+    </div>
+
+    <h4> Année </h4>
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.dateTimeMin) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.dateTimeMax) }}
+        </div>
+    </div>
+
+
+<button type="submit" class="btn btn-primary w-100"> Filtrer </div>
+
+{{ form_end(form) }}
+

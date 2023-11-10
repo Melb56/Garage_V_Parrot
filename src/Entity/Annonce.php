@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Entity\File;
+//use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 #[Vich\Uploadable]
@@ -21,11 +25,13 @@ class Annonce
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[Vich\UploadableField(mapping: 'annonce_image', fileNameProperty: 'imageName')]
-    private ?File $imageFile = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $file;
 
-    #[ORM\Column(nullable: true)]
-    private ?string $imageName = null;
+    #[Vich\UploadableField(mapping: 'annonce_images', fileNameProperty: 'file')]
+    //#[Assert\File(mimeTypes:'image/jpg')]
+    private ?File $imageFile;
+
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -51,6 +57,9 @@ class Annonce
     #[ORM\Column(type: Types::TEXT)]
     private ?string $equipement= null;
     
+    #[ORM\OneToOne(inversedBy: 'annonce', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
+    private ?Thumbnail $thumbnail = null;
+    
     #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: 'annonce')]
     private $user;
 
@@ -62,6 +71,7 @@ class Annonce
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
+        
     }
 
 
@@ -82,46 +92,46 @@ class Annonce
         return $this;
     }
 
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    
+    public function setFile($file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
      */
-    public function setImageFile(?File $imageFile = null): void
+    public function setImageFile(?File $file = null): void
     {
-        $this->imageFile = $imageFile;
+        $this->imageFile = $file;
 
-        if (null !== $imageFile) {
+        if ($file) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new \DateTimeImmutable('now');
         }
     }
 
-    public function getImageFile(): ?File
+    public function getImageFile()
     {
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-     /**
-     * Get the value of updatedAt
-     */
+   
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set the value of updatedAt
-     */
+    
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -170,9 +180,7 @@ class Annonce
         return $this->carburant;
     }
 
-    /**
-     * Set the value of carburant
-     */
+    
     public function setCarburant(?string $carburant): self
     {
         $this->carburant = $carburant;
@@ -192,17 +200,13 @@ class Annonce
         return $this;
     }
 
-    /**
-     * Get the value of option
-     */
+    
     public function getOption(): ?string
     {
         return $this->option;
     }
 
-    /**
-     * Set the value of option
-     */
+
     public function setOption(?string $option): self
     {
         $this->option = $option;
@@ -210,17 +214,13 @@ class Annonce
         return $this;
     }
 
-    /**
-     * Get the value of equipement
-     */
+    
     public function getEquipement(): ?string
     {
         return $this->equipement;
     }
 
-    /**
-     * Set the value of equipement
-     */
+
     public function setEquipement(?string $equipement): self
     {
         $this->equipement = $equipement;
@@ -228,17 +228,24 @@ class Annonce
         return $this;
     }
 
-      /**
-     * Get the value of user
-     */
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?Thumbnail $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+
     public function getUser()
     {
         return $this->user;
     }
 
-    /**
-     * Set the value of user
-     */
     public function setUser($user): self
     {
         $this->user = $user;
@@ -257,5 +264,11 @@ class Annonce
 
         return $this;
     }
-     
+  
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+
 }

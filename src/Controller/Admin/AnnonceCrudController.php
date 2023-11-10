@@ -31,7 +31,7 @@ class AnnonceCrudController extends AbstractCrudController
 
             ->setPageTitle('index', "Administration des voitures d'occasions")
 
-            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
+            /*->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')*/
         ;
     }
 
@@ -51,11 +51,15 @@ class AnnonceCrudController extends AbstractCrudController
                 ->setFormType(CKEditorType::class),
             TextareaField::new('equipement')
                 ->setFormType(CKEditorType::class),
-            ImageField::new('imageName')
-                ->setBasePath(VichImageType::class)
-                ->setUploadDir('public/annonceImages'),
+            TextField::new('imageFile')
+                ->setFormType(VichImageType::class),
+                //->onlyWhenCreating(),
+            ImageField::new('file')
+                ->setBasePath('/public/images/annonces')
+                ->onlyOnIndex(),
             SlugField::new('slug')
-                ->setTargetFieldName('title'),
+                ->setTargetFieldName('title')
+                ->hideOnIndex(),
         ];
     } 
     

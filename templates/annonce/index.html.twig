@@ -21,26 +21,51 @@ reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur..</
         </div>
   </div>
 
-      {% for annonce in annonces %}
-<div class=" container py-5 bg-body-white">
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md g-3">
-  <div class="col">
-    <div class="card shadow-sm">
-     <img class="card-img-top" src="img\chevy-impala-6889699_1280.jpg" alt="Image"></img>
-      <div class="card-body">
-        <h5 class="card-title">{{annonce.title}}</h5>
-        <p class="card-text"> Prix : {{annonce.price}}€ <br> Km : {{annonce.km}} Km<br> Année : {{annonce.dateTime}}</p>
+
+<div class="container">
+
+    <div class="row">
+
+  <div class="col-md-3">
+    {% include 'annonce/filter.html.twig' %}
+  </div> 
+  
+  <div class="grid">
+    {% for annonce in annonces %}
+     <!-- <div class=" container py-5 bg-body-white">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md g-3"> 
+        <div class="col">
+          <div class="card shadow-sm"> -->
+      {% if annonce.thumbnail %}
+      <a href="">
+      <img class="rounded-t-lg" src="{{ vich_uploader_asset(annonce.thumbnail, 'imageFile')}}" alt="{{ annonce.thumbnail.imageName}}"></img>
+      </a>
+      {% endif %}
+    <div class="card-body">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font bold tracking-tight text-gray-900 dark:text-white"> {{annonce.title}} </h5>
+      </a>
+      <p class="card-text"> Prix : {{annonce.price | number_format(0, ',', ' ') }}€ <br> 
+                            Km : {{annonce.km | number_format(0, ',', ' ') }} Km<br> 
+                            Année : {{annonce.dateTime}}</p>
+    </div>
+
+    <div class="btn">
+      <button type="button" class="btn btn-sm btn-outline-secondary"> 
+      <a style="text-decoration:none" href="{{ path('annoncedetails', {'slug': annonce.slug }) }}" >Détails</a>
+      </button>
+    </div> 
+
+     <!--</div>
       </div>
-      <div class="btn">
-                  <button type="button" class="btn btn-sm btn-outline-secondary"> 
-                  <a style="text-decoration:none" href="{{ path('annoncedetails', {'slug': annonce.slug }) }}">Détails</a>
-                  </button>
-      </div> 
-  </div>   
+    </div>
+    </div> -->
+    {% endfor %} 
+  </div>
+
+   
+    </div>
 </div>
-</div>
-</div> 
-{% endfor %} 
 
 {% endblock %}
 

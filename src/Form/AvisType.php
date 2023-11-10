@@ -45,7 +45,7 @@ class AvisType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Envoyé'
+                'label' => 'Envoyer'
             ]);
     }
 
@@ -54,6 +54,8 @@ class AvisType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Avis::class,
+            'method' => 'GET',
+            'csrf_protection' => false
         ]);
     }
 }

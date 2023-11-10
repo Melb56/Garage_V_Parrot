@@ -28,10 +28,10 @@ class AvisController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre message a été envoyé avec succès !'
+                'Votre témoignage a été envoyé avec succès !'
             );
     
-            return $this->redirectToRoute('\home\index.html.twig');
+            return $this->redirectToRoute('home\index.html.twig');
         } else {
             $this->addFlash(
                 'danger',
@@ -39,10 +39,8 @@ class AvisController extends AbstractController
             ); 
         }
 
-
         return $this->render('avis/avis.html.twig', [
-            /*'avis' => 'AvisController',*/
-            'avis' => $form,
+            'avis' => $form->createView(),
             
         ]);
     }

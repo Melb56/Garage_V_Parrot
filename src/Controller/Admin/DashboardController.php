@@ -21,13 +21,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[IsGranted('ROLE_USER')]
-    #[Route('/admin', name: 'admin')]
     //#[IsGranted('ROLE_USER')]
-    //#[IsGranted('ROLE_ADMIN')]
+    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        return $this->render('admin\dashboard.html.twig');
+        return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -38,7 +36,7 @@ class DashboardController extends AbstractDashboardController
 
      public function configureMenuItems(): iterable
     {   
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');   
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Employé', 'fas fa-user', User::class)
                 ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Annonce', 'fas fa-edit', Annonce::class); 

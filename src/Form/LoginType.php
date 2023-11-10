@@ -27,7 +27,7 @@ class LoginType extends AbstractType
                     new NotBlank(["message" => "Le nom d'utilisateur ne doit pas être vide !"])
                 ]
             ])
-            ->add("password", PasswordType::class, [
+            ->add("plainPasword", PasswordType::class, [
                 "label" => "Mot de passe",
                 "required" => true,
                 "constraints" => [

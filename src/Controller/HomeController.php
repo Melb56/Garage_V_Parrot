@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
 public function index(AvisRepository $avisRepository): Response
     {
-        return $this->render('/home/index.html.twig', [
+        return $this->render('base.html.twig', [
             'controller_name' => 'HomeController',
             /*'temoignage'=>$avisRepository->findAll(),*/
         ]);

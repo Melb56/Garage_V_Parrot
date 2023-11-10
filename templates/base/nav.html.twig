@@ -1,14 +1,17 @@
     
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
+  
       <!--logo -->
     <a class="navbar-brand" href="#">
       <img src="img\Logo_transparent.png" width="300" height="auto" alt="">
     </a>
+
        <!--Barre de navigation -->
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon bg-white"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" aria-current="page" href="{{ path('home')}}">Accueil</a>
@@ -16,6 +19,7 @@
         <a class="nav-link" href="{{ path('contact')}}">Contact</a>
       </div>
     </div>
+
         <!--n°téléphone -->
     <div class="row align-items-end">
         <div class="col">
@@ -24,12 +28,6 @@
           </div>
         </div>
     </div> 
-{% if app.user %}
-			Bienvenue
-				{{ app.user.prenom}}
-		<a href="/logout">Se déconnecter</a>
-						{% else %}
-		<a href="/login">Se connecter</a>
-{% endif %}
+
   </div>
 </nav>

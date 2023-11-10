@@ -75,7 +75,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Envoyé'
+                'label' => 'Envoyer'
             ]);
     }
 
@@ -83,6 +83,8 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class,
+            'method' => 'GET',
+            'csrf_protection' => false
         ]);
     }
 }

@@ -2,21 +2,27 @@
 
 {% block title %}Témoignages{% endblock %}
 
+
 {% block body %}
 
+{% for message in app.flashes('success') %}
+<div class="alert alert-success mt-4">
+    {{ message }}
+</div>
+{% endfor %}
 
-{{ form_start(avis) }}  
+{% for message in app.flashes('danger') %}
+<div class="alert alert-success mt-4">
+    {{ message }}
+</div>
+{% endfor %}
+
+{{ form_start(avis) }} 
+<div class="col-md-6 py-6">
+
                  <div class="form-group">
                     {{ form_label(avis.fullName) }} 
                     <div  placeholder=""> {{ form_widget(avis.fullName) }}  </div>     
-                </div>
-                <div class="form-group">
-                    {{ form_label(avis.email) }} 
-                    <div type="email"id="form-email" placeholder=""> {{ form_widget(avis.email) }} </div>     
-                </div>
-                <div class="form-group">
-                     {{ form_label(avis.subject) }}
-                    <div type="text" id="form-subject">{{ form_widget(avis.subject) }} </div>
                 </div>
                 <div class="form-group">
                      {{ form_label(avis.message) }} 
@@ -24,6 +30,11 @@
                     <p>Vos informations sont utilisées uniquement pour répondre à votre demande. Plus d’informations sur le traitement des données, rendez-vous sur notre page politique de confidentialité.</p>      
                 </div>    
 
-            <div type="submit" >{{ form_end(avis) }}</div>
+            <div type="submit" class="btn btn-primary w-100"> Envoyer </div>
+
+{{ form_end(avis) }}
+
+</div>
 
 {% endblock %}
+
