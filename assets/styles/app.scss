@@ -1,5 +1,41 @@
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 
+@import './base/footer.scss';
+@import './base/accueil.scss';
+@import './base/nav.scss';
+@import './avis.scss';
+
+@import '.annonce/accueilAnnonce.scss';
+@import '.annonce/details.scss';
+
+
+@import './contact.scss';
+@import './login.scss';
+
+
+
 // customize some Bootstrap variables
-$primary: darken(#42bfca, 20%);
+.btn{
+    background: #055C9D;
+    color : white
+} 
+
+body {
+    background: white;
+}
+
+h1, h2{
+    color: black;
+    text-align: center;
+    padding-bottom: 2%;
+    
+}
+
+p {
+    color: black;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+
+}
