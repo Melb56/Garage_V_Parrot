@@ -39,7 +39,7 @@ class AnnonceController extends AbstractController
             $request->query->getInt('page', 1),
             5
         );*/
-        return $this->render('Annonce/index.html.twig', [
+        return $this->render('annonce/index.html.twig', [
             'annonces'=>$annonces,
             'form' => $form->createView()
         ]);

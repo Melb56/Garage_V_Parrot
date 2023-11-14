@@ -1,52 +1,63 @@
  <!-- Présentation -->
 <section>
-    <div id="pres" class="bg container-fluid "> 
+    <div id="pres" class="bg container-fluid press"> 
         <h1>Bienvenue au Garage V. Parrot</h1>
-             <p id="paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum.</p>
+            <p >Le garage Vincent Parrot est un <b>véritable lieu de confiance</b>, où vous être assurés d'obtenir des <b>services de qualités</b>. Avec
+                des années d'expérience dans l'industrie de l'automobile, les employés fournir un service de qualité et personnalisé à
+                chaque client. Que ce soit pour l'<b>entretien régulier</b> de votre véhicule, des <b>réparations</b> plus importantes ou même pour
+                l'<b>achat d'une voiture d’occasion</b>, vous pouvez compter sur le garage V. Parrot pour vous fournir les <b>meilleurs services
+                et conseils</b>
+            </p>
+            <div class="row d-flex container-fluid text-center ">
+                <img class= "col-md-4 imgAccueil" src="/img/AccueilC1.png">
+                <img class="col-md-4 imgAccueil" src="/img/AccueilC2.jpg">
+                <img class="col-md-4 imgAccueil" src="/img/AccueilC3.jpg">
+            </div>   
+             
     </div>
 </section>
 
     <!--Services-->
 <section class="row d-flex container-fluid">    
+
             <!--Réparation-->
-        <div class="col-lg-4 text-center"> 
-            <img class="" width="140" height="140" src="/img/reparation-automobile (2).png" role="img"width="100%" height="100%"></img>
-            <h2>Réparation</h2>
-                <p>rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun ut labore et dolore agna aliqua.</p>
-        </div> 
+    <div id="service1" class="col-lg-4"> 
+        <img class="" width="140" height="140" src="/img/reparation-automobile (2).png" role="img"width="100%" height="100%"></img>
+        <h2>Réparation</h2>
+        <p id="serviceText">Notre équipe de professionnels qualifiés est spécialisée dans la réparation de la carrosserie et de la mécanique des
+        voitures. Que votre véhicule ait subi des dommages mineurs ou majeurs, nous sommes là pour vous aider. Nous nous
+        engageons à fournir un travail de qualité. Faites-nous confiance pour prendre soin de votre voiture et la remettre sur
+        la route en parfait état.</p>
+    </div> 
+
             <!--Entretien-->
-        <div class="col-lg-4 text-center"> 
-            <img class="" width="140" height="140" src="/img/reparation-automobile (3).png" role="img" width="100%" height="100%"></img>
-            <h2>Entretien</h2>
-                <p>rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.</p>
-        </div> 
+    <div id="service2" class="col-lg-4"> 
+        <img class="" width="140" height="140" src="/img/reparation-automobile (3).png" role="img" width="100%" height="100%"></img>
+        <h2>Entretien</h2>
+        <p id="serviceText">Nous proposons un service d'entretien régulier pour garantir la performance, la sécurité et la durabilité des voitures.
+        Notre équipe se charge de vérifier tous les aspects de votre véhicule, y compris le moteur, les freins, la suspension et
+        les systèmes électroniques. Nous utilisons des équipements de pointe et des techniques de diagnostic avancées pour
+        détecter et résoudre tout problème potentiel avant qu'il ne devienne majeur. De plus, nous vous offrons des conseils
+        personnalisés pour l'entretien de votre voiture afin de prolonger sa durée de vie et d'optimiser ses performances.
+        Faites confiance à notre service d'entretien régulier pour garder votre voiture en parfait état et rouler en toute
+        tranquillité.</p>
+    </div> 
+
             <!--Voitures d'occas-->  
-        <div class="col-lg-4 text-center"> 
-            <img class="" width="140" height="140" src="/img/voiture (1).png" role="img" width="100%" height="100%" fill="var(--bs-secondary-color)"/></img>
-            <h2 class="">Voitures d’occasion</h2>
-                <p>rem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore agna aliqua.</p>
-                    <a class="btn " href="{{ path('annonceindex')}}">Plus de détails</a>
-        </div> 
+    <div id="service3" class="col-lg-4"> 
+        <img class="" width="140" height="140" src="/img/voiture (1).png" role="img" width="100%" height="100%" fill="var(--bs-secondary-color)"/></img>
+        <h2 class="">Voitures d’occasion</h2>
+        <p id="serviceText">Nous proposons un large choix de véhicules d'occasion de différentes marques et modèles. Tous nos véhicules sont
+        soigneusement inspectés et entretenus pour garantir leur bonne qualité et leur fiabilité. Faites-nous confiance pour
+        trouver le véhicule qui correspond parfaitement à vos besoins et à votre budget.</p>
+            <a class="btn "href="{{ path('annonceindex')}}">Plus de détails</a>
+    </div> 
 
             <!--Bouton Nous contacter-->    
-        <div class= "text-center"> 
-            <button class="btn btn-lg" href="{{ path('contact')}}">Nous contacter</button>
-        </div>
-</section>
-
-<section> 
-    <div id="avis" class="bg container-fluid">
-<h2>Témoignages</h2>
-
+    <div class= "bntContactAccueil"> 
+        <a class="btn btn-lg" href="{{ path('contact')}}">Nous contacter</a>
     </div>
-   
 </section>
+
 
     

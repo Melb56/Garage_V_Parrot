@@ -1,56 +1,33 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block title %}{{annonce.title}}{% endblock %}
-
-
-
 
 {% block body %}
 
 <section class="py-5">
   <div class="container">
     <div class="row gx-5">
+
       <aside class="col-lg-6">
         <div class="border rounded-4 mb-3 d-flex justify-content-center">
           <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="#">
-            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" >{{annonce.imageName}}</img>
+            <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" ></img>
           </a>
-        </div>
-        <!-- gallerie -->
-        <div class="d-flex justify-content-center mb-3">
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="img\chevy-impala-6889699_1280.jpg" class="item-thumb">
-            <img width="60" height="60" class="rounded-2">{{annonce.imageName}}</img>
-          </a>
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="img\chevy-impala-6889699_1280.jpg" class="item-thumb">
-            <img width="60" height="60" class="rounded-2"  >{{annonce.imageName}}</img>
-          </a>
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="img\chevy-impala-6889699_1280.jpg" class="item-thumb">
-            <img width="60" height="60" class="rounded-2" >{{annonce.imageName}}</img>
-          </a>
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="img\chevy-impala-6889699_1280.jpg" class="item-thumb">
-            <img width="60" height="60" class="rounded-2"  >{{annonce.imageName}}</img>
-          </a>
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="img\chevy-impala-6889699_1280.jpg" class="item-thumb">
-            <img width="60" height="60" class="rounded-2"  >{{annonce.imageName}}</img>
-          </a>
-        </div>
-        <!-- gallerie -->
+        </div>      
       </aside>
 
       <main class="col-lg-6">
         <div class="ps-lg-3">
-          <h4 class="title text-dark"> {{annonce.title}} </h4>
-          <div class="d-flex flex-row my-3"> </div>
+          <h4 class="title"> {{annonce.title}} </h4>
+          <div class="d-flex flex-row my-3"> 
           <p>{{annonce.description}}</p>
-
+          </div>
           <div class="row">
             <dt class="col-3">Prix :</dt>
-            <dd class="col-9">{{annonce.price}}€</dd>
+            <dd class="col-9">{{annonce.price | number_format(0, ',', ' ')}}€</dd>
 
             <dt class="col-3">Km : </dt>
-            <dd class="col-9">{{annonce.km}}km</dd>
+            <dd class="col-9">{{annonce.km | number_format(0, ',', ' ')}}km</dd>
 
             <dt class="col-3">Année :</dt>
             <dd class="col-9">{{annonce.dateTime}}</dd>
@@ -60,21 +37,21 @@
           </div>
           <hr />
       <!--Description-->
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h6> Options : {{annonce.option}}</h6>
-       
-    </div>  
-     <div class="col">
-      <h6> Equipements : {{annonce.equipement}}</h6>
-      </div> 
-</div>
-  <!--Description-->
-     </main>
+            <div class="container">
+              <div class="row">
+                <div class="col subTitle">
+                  <h5> Options :</h5>
+                    {{annonce.option}}
+                </div>  
+                <div class="col subTitle">
+                  <h5> Equipements : </h5>
+                    {{annonce.equipement}} 
+                  </div> 
+            </div>
+      </main>
+
     </div>
   </div>
-
   <div class= "text-center"> <button type="button" class="btn btn-primary btn-lg"><a class="text-white" style="text-decoration:none" href="{{ path('contact')}}" >Nous contacter</a></button></div>
 </section>
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Annonce;
+use App\Entity\AnnonceImage;
 use App\Entity\Avis;
 use App\Entity\Contact;
 use App\Entity\Home;
@@ -39,7 +40,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Employé', 'fas fa-user', User::class)
                 ->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('Annonce', 'fas fa-edit', Annonce::class); 
+        yield MenuItem::linkToCrud('Annonce', 'fas fa-edit', Annonce::class);
         yield MenuItem::linkToCrud('Information', 'fas fa-edit', Home::class)
                ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Demandes de contact', 'fas fa-envelope', Contact::class); 

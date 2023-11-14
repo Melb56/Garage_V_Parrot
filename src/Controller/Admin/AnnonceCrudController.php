@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\Annonce;
 
+use App\Form\Type\AnnonceImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -51,15 +53,17 @@ class AnnonceCrudController extends AbstractCrudController
                 ->setFormType(CKEditorType::class),
             TextareaField::new('equipement')
                 ->setFormType(CKEditorType::class),
-            TextField::new('imageFile')
+           TextField::new('imageFile')
                 ->setFormType(VichImageType::class),
                 //->onlyWhenCreating(),
-            ImageField::new('file')
-                ->setBasePath('/public/images/annonces')
+            ImageField::new('imageName')
+                ->setBasePath('/images/annonces')
                 ->onlyOnIndex(),
+            /*CollectionField::new('images')
+                ->setEntryType(AnnonceImageType::class),*/
             SlugField::new('slug')
                 ->setTargetFieldName('title')
-                ->hideOnIndex(),
+                ->hideOnIndex(),  
         ];
     } 
     

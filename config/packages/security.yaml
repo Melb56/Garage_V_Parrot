@@ -30,6 +30,7 @@ security:
                 #enable_csrf: true   
                 #username_parameter: email
                 #password_parameter: password
+                default_target_path: admin
 
             logout:
                  path: logout

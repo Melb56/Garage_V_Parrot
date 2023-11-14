@@ -1,10 +1,16 @@
 nav {
     background: #C2CDD5;
+    font-weight: bold;
     border-bottom: thin solid black;
     padding-bottom: 2%;
     
 }
 
-.nav-link{
+.nav-link {
     color:  black
 }
+
+.bg-white {
+    --bs-bg-opacity: 0;
+}
+

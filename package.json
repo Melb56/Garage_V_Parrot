@@ -28,5 +28,8 @@
     },
     "browserslist": [
         "defaults"
-    ]
+    ],
+    "dependencies": {
+        "gsap": "^3.12.2"
+    }
 }
