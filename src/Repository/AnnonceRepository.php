@@ -24,7 +24,7 @@ class AnnonceRepository extends ServiceEntityRepository
                                 PaginatorInterface $paginatorInterface)
     {
         parent::__construct($registry, Annonce::class);
-        //$this->paginatorInterface = $paginatorInterface;
+        $this->paginatorInterface = $paginatorInterface;
        
 
     }

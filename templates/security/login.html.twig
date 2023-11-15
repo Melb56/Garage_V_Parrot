@@ -4,15 +4,13 @@
 
 {% block body %}
 
-      <div class="container"> 
-	  	<h1 class"mt-4"> Garage V. Parrot - Formulaire de connexion </h1>
+    <div id="login" class="container"> 
+	  	<h1> Formulaire de connexion </h1>
 
-      
-		<form action="{{ path('login') }}" method="post" name="login">
+		<form  action="{{ path('login') }}" method="post" name="login">
 				<div class="form-group">
 					<label for="username" class="form-label mt-4">Adresse email</label>
 					<input type="email" class="form-control" id="username" name="_username" placeholder="exemple@test.com" value="{{ last_username }}">
-					<small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre e-mail.</small>
 				</div>
 				<div class="form-group">
 					<label for="password" class="form-label mt-4">Mot de passe</label>
@@ -23,6 +21,8 @@
 					Se connecter
 				</button>
 			</form>
+
+	</div>
 
       
       

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -24,17 +25,13 @@ class ContactCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Demande de contact')
             ->setEntityLabelInPlural('Demandes de contact')
-
             ->setPageTitle("index", "Administration des demandes de contact")
-        
-            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
-
             ->setPaginatorPageSize(30)
+            
         ;
     }
 
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -43,14 +40,13 @@ class ContactCrudController extends AbstractCrudController
             TextField::new('fullName'),
             TextField::new('email'),
             TextareaField::new('message')
-                ->setFormType(CKEditorType::class)
                 ->hideOnIndex(),
             DateTimeField::new('createdAt')
                 ->hideOnForm()
                 
-        ];
-                
+        ];        
     }
-    
-}
 
+
+
+}

@@ -13,7 +13,6 @@ import './bootstrap';
 
 import "bootstrap";
 
-//import './script/formulaireContact.js';
 
 // loads the jquery package from node_modules
 import $ from 'jquery';
@@ -25,7 +24,4 @@ import $ from 'jquery';
 $(document).ready(function() {
      $('body').prepend('<h1>'+greet('jill')+'</h1>');
 });*/
-
-//animations page accueil
-
 

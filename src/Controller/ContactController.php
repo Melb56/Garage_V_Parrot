@@ -36,7 +36,7 @@ class ContactController extends AbstractController
             ['contact' => $contact]
         );
 
-      /*  $this->addFlash(
+        $this->addFlash(
             'success',
             'Votre message a été envoyé avec succès !'
         );
@@ -46,7 +46,7 @@ class ContactController extends AbstractController
         $this->addFlash(
             'danger',
             $form->getErrors()
-        );  */
+        );  
     }
 
         return $this->render('contact/index.html.twig', [

@@ -4,6 +4,19 @@
 
 {% block body %}
 
+
+{% for message in app.flashes('success') %}
+<div  class="alertGood alert-success mt-4">
+    {{ message }}
+</div>
+{% endfor %}
+
+{% for message in app.flashes('danger') %}
+<div id="alertError" class="alert-success mt-4">
+    {{ message }}
+</div>
+{% endfor %}
+
 <div class="container">
 
     <div class="text-center">
@@ -22,7 +35,7 @@
             <!--formulaire de contac-->
         <div class="col-md-6 py-6">
         <h2> Formulaire de contact</h2>
-        <form id="contactForm" onsubmit="validateForm(event)">
+        <form>
             {{ form_start(form) }}  
                  <div class="form-group">
                     <div for="name"> {{ form_label(form.fullName) }}  </div>

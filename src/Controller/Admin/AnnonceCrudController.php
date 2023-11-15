@@ -32,8 +32,7 @@ class AnnonceCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Annonces')
 
             ->setPageTitle('index', "Administration des voitures d'occasions")
-
-            /*->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')*/
+            ->setPaginatorPageSize(10)
         ;
     }
 

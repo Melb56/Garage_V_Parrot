@@ -1,18 +1,16 @@
 
 
 {{ form_start(form) }}
-<p> Filtres </p>
-<form id="filters" class="container-fluid">
 
 <div class="col"> 
-    <div class="row col-6 ">
+    <div class="row col-10">
     {{ form_row(form.q) }}
     </div>
  </div>   
     
 <div class="col">
     <div class="row">
-        <h4> Prix </h4>
+        <h6> Prix </h6>
             <div class="col-4">
                 {{ form_row(form.min) }}
             </div>
@@ -24,7 +22,7 @@
 
 <div class="col">
     <div class="row">
-        <h4> Kilométrage </h4>
+        <h6> Kilométrage </h6>
             <div class="col-4">
                 {{ form_row(form.kmMin) }}
             </div>
@@ -36,22 +34,21 @@
 
 <div class="col">
     <div class="row">
-        <h4> Année </h4>
-            <div class="col-4">
+        <h6> Année </h6>
+            <div class="col-5">
                 {{ form_row(form.dateTimeMin) }}
             </div>
-            <div class="col-4">
+            <div class="col-5">
                 {{ form_row(form.dateTimeMax) }}
             </div>
     </div>
 </div>
 
 <div class="col">
-    <div class="row col-3 ">   
-        <button type="submit" class="btn btn-primary w-100"> Filtrer </div>
+    <div class="row col-3">   
+        <button type="submit" class="btn btn-primary w-100 "> Filtrer </div>
     </div>
 </div>
 
-</form>
 {{ form_end(form) }}
 

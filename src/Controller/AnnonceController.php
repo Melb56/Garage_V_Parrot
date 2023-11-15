@@ -21,7 +21,6 @@ class AnnonceController extends AbstractController
 {
     #[Route('/', name: 'index')]  
     public function Annonce (AnnonceRepository $annonceRepository, 
-                             PaginatorInterface $paginator,
                              Request $request
                             ): Response
     {
@@ -31,14 +30,9 @@ class AnnonceController extends AbstractController
         $form = $this->createForm(SearchForm::class, $data);
         
         $form->handleRequest($request);
-        //$searchData->page = $request->query->getInt('page', 1);
         $annonces = $annonceRepository-> findBySearch($data);   
         
-        /*$annonces= $paginator->paginate(
-            $data,
-            $request->query->getInt('page', 1),
-            5
-        );*/
+     
         return $this->render('annonce/index.html.twig', [
             'annonces'=>$annonces,
             'form' => $form->createView()
