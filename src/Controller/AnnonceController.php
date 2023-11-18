@@ -27,19 +27,12 @@ class AnnonceController extends AbstractController
         $form = $this->createForm(SearchForm::class, $data);
         
         $form->handleRequest($request);
-       /* [$min, $max] = $annonceRepository->findMinMax($data);*/
         $annonces = $annonceRepository-> findBySearch($data);   
-       /*if ($request->get('ajax')) {
-            return new JsonResponse([
-                'content' => $this->renderView('annonce/_annonce.html.twig', ['annonces' => $annonces]),
-            ]);
-        } */
+    
      
         return $this->render('annonce/index.html.twig', [
             'annonces'=>$annonces,
             'form' => $form->createView(),
-           /* 'min' => $min,
-            'max' => $max*/
         ]);
         
     }
