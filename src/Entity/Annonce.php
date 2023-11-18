@@ -22,10 +22,15 @@ class Annonce
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
     
+    #[ORM\Column()]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
+    #[Assert\Length(
+        min: 1, max: 150,
+        minMessage : "Le titre ne doit pas faire moins de 1 caractères",
+        maxMessage : "Le titre ne doit pas faire plus de 150 caractères"
+        )]
+    private ?string $title = null;
 
     #[Vich\UploadableField(mapping: 'annonce_images', fileNameProperty: 'imageName')]
     //#[Assert\File(mimeTypes:'image/jpg')]
@@ -38,28 +43,38 @@ class Annonce
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
     private ?float $price = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
     private $dateTime;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
     private ?float $km = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
     private ?string $carburant = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
+    #[Assert\Length(
+        min: 2,
+        max: 600,
+        minMessage: "La description doit faire entre 2 et 600 caractères.",
+        maxMessage: "La description doit faire entre 2 et 600 caractères."
+    )]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Le contenu ne doit pas être vide !')]
     private ?string $option = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message : 'Le contenu ne doit pas être vide !')]
     private ?string $equipement= null;
-    
-   /* #[ORM\OneToOne(inversedBy: 'annonce', targetEntity: Thumbnail::class, cascade: ['persist', 'remove'])]
-    private ?Thumbnail $thumbnail = null;*/
     
     #[ORM\ManyToOne(targetEntity: "App\Entity\User", inversedBy: 'annonce')]
     private $user;

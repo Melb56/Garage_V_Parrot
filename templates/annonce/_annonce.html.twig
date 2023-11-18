@@ -1,0 +1,18 @@
+{% for annonce in annonces %}
+<div class="col ">
+    <div class="card">
+        <img class="img-fluid" src="{{ vich_uploader_asset(annonce, 'imageFile') }} ">
+        <div class="card-body">
+            <h5>{{annonce.title}}</h5>
+            <div class="card-content">
+                <p>
+                    Prix : {{annonce.price | number_format(0, ',', ' ') }}€ <br>
+                    Km : {{annonce.km | number_format(0, ',', ' ') }} Km<br>
+                    Année : {{annonce.dateTime}}
+                </p>
+                <a class="btn text-center" href="{{ path('annoncedetails', {'slug': annonce.slug }) }}">Détails</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

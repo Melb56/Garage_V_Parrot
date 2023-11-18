@@ -18,7 +18,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class AjoutAnnonceType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+
+    /**
+     * Summary of buildForm
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
+
+    public function buildForm(FormBuilderInterface $builder, array $options) :void
     {
         $builder
             ->add("title", TextType::class, [
@@ -52,8 +60,8 @@ class AjoutAnnonceType extends AbstractType
                 "label" => "Contenu",
                 "required" => true,
                 "constraints" => [
-                    new Length(["min" =>1, "max" => 5, "minMessage" => "La description doit faire entre 5 et 320 caractères", 
-                    "maxMessage" => "La description doit faire entre 5 et 320 caractères"]),
+                    new Length(["min" =>1, "max" => 5, "minMessage" => "Le contenu doit faire entre 1 et 320 caractères", 
+                    "maxMessage" => "La description doit faire entre 1 et 320 caractères"]),
                     new NotBlank(["message" => 'La description ne doit pas être vide !'])
                 ]
             ])
@@ -106,13 +114,11 @@ class AjoutAnnonceType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver) : void
     {
         $resolver->setDefaults([
             "data_class" => Annonce::class,
             'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'annonce_item',
         ]);
     }
 }

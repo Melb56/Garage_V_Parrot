@@ -13,15 +13,45 @@ import './bootstrap';
 
 import "bootstrap";
 
-
 // loads the jquery package from node_modules
 import $ from 'jquery';
 
 // import the function from greet.js (the .js extension is optional)
 // ./ (or ../) means to look for a local file
-/*import greet from './greet';
+import greet from './greet';
 
 $(document).ready(function() {
-     $('body').prepend('<h1>'+greet('jill')+'</h1>');
-});*/
+    $('body').prepend('<h1>' + greet('jill') + '</h1>');
+});
 
+//import Filter from "./script/Filter";
+
+//new Filter(document.querySelector('.js-filter'))
+
+//noUiSlider filtre
+/*import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css'
+
+
+const slider = document.getElementById("price-slider");
+
+if (slider) {
+
+    const min = document.getElementById("search_form_min")
+    const max = document.getElementById("search_form_max") 
+    const range = noUiSlider.create(slider, {
+  start: [min.value || 0, max.value || 1],
+  step: 10,
+  connect: true,
+  range: {
+    'min': _slider.dataset.,
+    'max': 100
+  }
+    })
+    
+       
+    
+    range.on('slide', function (values, handle) {
+        console.log(values, handle)
+    }) 
+} */

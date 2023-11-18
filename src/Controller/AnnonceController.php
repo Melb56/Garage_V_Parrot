@@ -6,15 +6,12 @@ use App\Data\SearchData;
 use App\Entity\Annonce;
 use App\Form\SearchForm;
 use App\Repository\AnnonceRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 #[Route('/voitures-doccasion', name: 'annonce')]  
 class AnnonceController extends AbstractController
@@ -30,12 +27,19 @@ class AnnonceController extends AbstractController
         $form = $this->createForm(SearchForm::class, $data);
         
         $form->handleRequest($request);
+       /* [$min, $max] = $annonceRepository->findMinMax($data);*/
         $annonces = $annonceRepository-> findBySearch($data);   
-        
+       /*if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('annonce/_annonce.html.twig', ['annonces' => $annonces]),
+            ]);
+        } */
      
         return $this->render('annonce/index.html.twig', [
             'annonces'=>$annonces,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+           /* 'min' => $min,
+            'max' => $max*/
         ]);
         
     }

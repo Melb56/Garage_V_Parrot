@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
-class UserUnitTest extends TestCase
+class BasicTest extends TestCase
 {
     public function testSomething(): void
     {

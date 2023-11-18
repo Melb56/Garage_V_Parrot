@@ -12,7 +12,7 @@
 {% endfor %}
 
 {% for message in app.flashes('danger') %}
-<div id="alertError" class="alert-success mt-4">
+<div class="alert-success mt-4">
     {{ message }}
 </div>
 {% endfor %}
@@ -38,28 +38,26 @@
         <form>
             {{ form_start(form) }}  
                  <div class="form-group">
-                    <div for="name"> {{ form_label(form.fullName) }}  </div>
-                    <div type="text" id="fullName"> {{ form_widget(form.fullName) }} </div>  
-                    <span id="nameError" class="error"></span>
+                    <div > {{ form_label(form.fullName) }}  </div>
+                    <div type="text"> {{ form_widget(form.fullName) }} </div>  
                 </div>
                 <div class="form-group">
-                    <div for="email">{{ form_label(form.email) }}</div> 
-                    <div  type="email" id="email"> {{ form_widget(form.email) }} </div>
-                    <span id="emailError" class="error"></span>
+                    <div>{{ form_label(form.email) }}</div> 
+                    <div  type="email"> {{ form_widget(form.email) }} </div>
                 </div>
                 <div class="form-group">
-                     {{ form_label(form.subject) }}
-                    <div type="text" id="subject"> {{ form_widget(form.subject) }} </div>
+                     <div>{{ form_label(form.subject) }} </div>
+                    <div type="text"> {{ form_widget(form.subject) }} </div>
                 </div>
                 <div class="form-group">
                     <div for="message"> {{ form_label(form.message) }}  </div>
-                    <div id="message" placeholder="Message" >{{ form_widget(form.message) }} </div>
-                    <span id="messageError" class="error"></span>
+                    <div >{{ form_widget(form.message) }} </div>
                     <div class="mlForm">
                         <p >Vos informations sont utilisées uniquement pour répondre à votre demande. Plus d’informations sur le traitement des données, rendez-vous sur notre page <a href="{{ path('mentions_legales')}}">mentions légales</a> .</p>      
                     </div>
-                </div>          
-            <div type="submit" value="Envoyer"> {{ form_end(form) }} </div>
+                </div>  
+                <div> {{ form_end(form) }} </div>
+                   
         </form>
         </div>
     </div>

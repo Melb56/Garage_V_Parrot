@@ -88,9 +88,16 @@ class AnnonceRepository extends ServiceEntityRepository
         }
         
         return $query->getQuery()->getResult();
-
-                
-    
     }
+
+    /**
+     * Récupère le prix minimum et maximum correspondant à une recherche
+     * @param SearchData $searchData
+     * @return integer[]
+     */
+    /*public function findMinMax(SearchData $searchData): array
+    {
+        return [0, 1000];
+    }*/
 }
    
