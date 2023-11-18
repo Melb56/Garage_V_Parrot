@@ -51,8 +51,7 @@
         "twig/extra-bundle": "^3.7",
         "twig/string-extra": "^3.7",
         "twig/twig": "^2.12|^3.0",
-        "vich/uploader-bundle": "^2.2",
-        "heroku/heroku-buildpack-php": "*"
+        "vich/uploader-bundle": "^2.2"
     },
     "config": {
         "allow-plugins": {
@@ -112,6 +111,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^6.3",
         "symfony/stopwatch": "6.3.*",
-        "symfony/web-profiler-bundle": "6.3.*"
+        "symfony/web-profiler-bundle": "6.3.*",
+        "heroku/heroku-buildpack-php": "*"
     }
 }
