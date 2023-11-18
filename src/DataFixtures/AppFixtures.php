@@ -33,14 +33,14 @@ class AppFixtures extends Fixture
            $user = [];
 
             //Creation de l'admin  
-           /* $admin = new User();
+            $admin = new User();
             $admin->setEmail('admin@test.com')
                 ->setPrenom('Vincent')
                 ->setNom('Parrot')
                 ->setRoles(['ROLE_USER', 'ROLE_ADMIN'])
                 ->setPlainPassword('password');
             $user[] = $admin;
-            $manager->persist($admin);*/
+            $manager->persist($admin);
 
 
             //Creation de l'employé
