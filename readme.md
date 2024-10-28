@@ -28,6 +28,8 @@ garage et d’un commentaire.
 Vincent Parrot demande un site vitrine qui reflète la philosophie du garage qui est de
 délivrer un service de qualité et personnalisé à chaque client.
 
+Pour savoir les détails de la réalisation du site aller voir le fichier dossier projet.
+
 ## Environnement de développement
 
 ### Pré-requis
